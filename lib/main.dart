@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Wheather App',
       routes: getAppRoutes(),
-      initialRoute: 'home',
+      initialRoute: 'detalle',
+      theme: ThemeData(
+        primaryColor: Color(0xfff70CA44),
+      ),
     );
   }
 }
