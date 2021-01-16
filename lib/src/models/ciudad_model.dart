@@ -42,8 +42,6 @@ class Ciudad {
       
       var list = json['weather'] as List;
       List<Weather> weatherList = list.map((i)=> Weather.fromJsonMap(i)).toList();
-      print("info: ${json['coord']}");
-      print("Mapeado: ${Coord.fromJsonMap(json['coord'])}");
       id      = json['id'];
       dt      = json['dt'];
       name    = json['name'];

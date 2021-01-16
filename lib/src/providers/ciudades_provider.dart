@@ -27,7 +27,7 @@ class CiudadesProvider{
     final decodedData = json.decode(resp.body);
 
     final ciudades = new Ciudades.fromJsonList(decodedData['list']);
-    return [];
+    return ciudades.items;
 
   }
 }
