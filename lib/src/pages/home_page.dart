@@ -16,12 +16,12 @@ class HomePage extends StatelessWidget {
 
       ),
 
-      body: _cuerpo( _screenSize ),
+      body: _cuerpo( _screenSize, context ),
     );
   }
 
 
-  Widget _cuerpo( size ){
+  Widget _cuerpo( size, BuildContext context ){
     
     final ciudadesProvider = new CiudadesProvider();
     ciudadesProvider.getListaCiudades();
@@ -35,10 +35,15 @@ class HomePage extends StatelessWidget {
           SizedBox(height: size.height * 0.05),
 
           Container(
-            child: Text('Ciudades cercanas'),
+            padding: EdgeInsets.all(size.height * 0.018),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(20)
+            ),
+            child: Text('Ciudades cercanas', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),
           ),
 
-          SizedBox(height: size.height * 0.05),
+          SizedBox(height: size.height * 0.03),
 
           CarruselWidget()
         ],

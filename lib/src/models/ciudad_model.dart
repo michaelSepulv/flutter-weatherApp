@@ -22,6 +22,7 @@ class Ciudad {
   Coord coord;
   Main main;
   Wind wind;
+  Sys sys;
   dynamic rain;
   dynamic snow;
   List<Weather> weather;
@@ -34,6 +35,7 @@ class Ciudad {
     this.main,
     this.wind,
     this.rain,
+    this.sys,
     this.snow,
     this.weather,
   });
@@ -50,6 +52,7 @@ class Ciudad {
       wind    = Wind.fromJsonMap(json['wind']);
       rain    = json['rain'];
       snow    = json['snow'];
+      sys     = Sys.fromJsonMap(json['sys']);
       weather = weatherList;
   }
 
@@ -71,9 +74,18 @@ class Coord {
       lat: jsonMap['lat'] / 1 ,
     );
     
-    
-    /* lon = json['Lon'] /1;
-    lat = json['Lat'] /1 / 1; */
+  }
+}
+
+class Sys{
+  String country;
+
+  Sys({this.country});
+
+  factory Sys.fromJsonMap(Map<String, dynamic> json ){
+    return Sys(
+      country: json['country']
+    );
   }
 }
 

@@ -1,4 +1,7 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_app/src/models/ciudad_model.dart';
 import 'package:weather_app/src/providers/ciudades_provider.dart';
 
@@ -22,6 +25,11 @@ class CarruselWidget extends StatelessWidget {
         future: ciudadesProvider.getListaCiudades(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot){
           if (snapshot.hasData){
+            if (snapshot.data.isEmpty) {
+              return Center(
+                child: Text("No hay ciudades disponibles"),
+              );
+            }
             return CiudadesHorizontal(ciudades: snapshot.data);
           }else{
             return Center(child: CircularProgressIndicator());
@@ -55,23 +63,42 @@ class CiudadesHorizontal extends StatelessWidget {
     
     final _screenSize = MediaQuery.of(context).size;
     return ciudades.map( (ciudad){
+      final imageUrl = 'http://openweathermap.org/img/wn/${ ciudad.weather[0].icon }@2x.png';
       return Container(
         height: _screenSize.height * 0.65,
         width:  _screenSize.width * 0.4,
         margin: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.02),
+        padding: EdgeInsets.symmetric(vertical: _screenSize.height * 0.04),
         decoration: BoxDecoration(
-          color: Colors.grey[400],
+          color: Color(0xfA670CA44),
           borderRadius: BorderRadius.circular(40)
         ),
         child: Column(
-          
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            SizedBox(height: _screenSize.height * 0.03,),
-            Text('Ciudad: ${ ciudad.name }', style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 25),),
-            Text('Temp. actual: ${ (ciudad.main.temp.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Theme.of(context).primaryColor,),),
-            Text('Temp. min: ${ (ciudad.main.tempMin.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Theme.of(context).primaryColor,),),
-            Text('Temp. min: ${ (ciudad.main.tempMax.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Theme.of(context).primaryColor,),),
-            Text('Humedad: ${ ciudad.main.humidity } %', style: TextStyle(color: Theme.of(context).primaryColor,),),
+            //SizedBox(height: _screenSize.height * 0.04,),
+            Text('Ciudad: ${ ciudad.name }', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),),
+            SizedBox(height: _screenSize.height * 0.05,),
+            
+            Container(
+              width: _screenSize.height * 0.2,
+              height: _screenSize.height * 0.2,
+              child: FadeInImage(
+                placeholder: AssetImage('assets/loading.gif'), 
+                image: NetworkImage(imageUrl)),
+            ),
+            Text(ciudad.weather[0].description.toUpperCase() , style: TextStyle(color: Colors.white, fontSize: 20),),
+            Text('${ (ciudad.main.temp.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Colors.white, fontSize: 30),),
+            Text('Temp. máx: ${ (ciudad.main.tempMin.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Colors.white,),),
+            Text('Temp. min: ${ (ciudad.main.tempMax.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Colors.white,),),
+            Text('Humedad: ${ ciudad.main.humidity } %', style: TextStyle(color: Colors.white,),),
+
+            RaisedButton(
+              color: Colors.blue,
+              shape: StadiumBorder(),
+              child: Text('Ver detalle', style: TextStyle(color: Colors.white),),
+              onPressed: (){},
+            )
 
           ],
         ),
