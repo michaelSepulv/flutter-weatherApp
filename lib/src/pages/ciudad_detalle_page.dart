@@ -2,6 +2,7 @@ import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_app/src/models/ciudad_model.dart';
+import 'package:weather_app/src/search/search_delegate.dart';
 import 'package:weather_app/src/widgets/carrusel_pronosticos.dart';
 
 
@@ -14,7 +15,8 @@ class CiudadDetallePage extends StatelessWidget {
         title: Text(ciudad.name , style: TextStyle(color: Colors.white),),
         centerTitle: true,
         actions: <Widget>[
-          IconButton(icon: Icon(FontAwesomeIcons.search), onPressed: (){})
+          IconButton(icon: Icon(FontAwesomeIcons.search), 
+          onPressed: ()=> showSearch(context: context, delegate: DataSearch()))
         ],
 
       ),
@@ -27,22 +29,24 @@ class CiudadDetallePage extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: Container(
-              margin: EdgeInsets.all(_screenSize.height * 0.02 ),
-              padding: EdgeInsets.all(_screenSize.height * 0.014 ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(20)
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(_screenSize.height * 0.02 ),
+                padding: EdgeInsets.all(_screenSize.height * 0.014 ),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                child: Text('Ciudad de: ${ciudad.name}', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
               ),
-              child: Text('Ciudad de: ${ciudad.name}', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
             ),
-          ),
-          _superior(context, ciudad, _screenSize),
-          CarruselPronosticoWidget(lat: ciudad.coord.lat.toString(), lon: ciudad.coord.lon.toString())
-        ],
+            _superior(context, ciudad, _screenSize),
+            CarruselPronosticoWidget(lat: ciudad.coord.lat.toString(), lon: ciudad.coord.lon.toString())
+          ],
+        ),
       ),
     );
   }

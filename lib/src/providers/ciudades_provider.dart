@@ -42,4 +42,24 @@ class CiudadesProvider{
     final pronosticos = new Pronosticos.fromJsonList(decodedData['daily']);
     return pronosticos.items;
   }
+
+  //Peticion http para buscar ciuddad
+  
+  Future<Ciudad> buscarCiudad(String query)async{
+    query = query.replaceAll(' ', '+');
+    print('consulta: ${query}');
+    try {
+      final urlSearch = 'http://api.openweathermap.org/data/2.5/weather?q=${query}&lang=es&units=metric&appid=${_apikey}';
+      final resp = await http.get(urlSearch);
+      //if (resp.statusCode == 404) return [];
+        
+      final decodedData = json.decode(resp.body);
+      final ciudad = new Ciudad.fromJsonMap(decodedData);
+      return ciudad;
+      
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
 }

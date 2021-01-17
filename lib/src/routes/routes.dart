@@ -6,7 +6,7 @@ import 'package:weather_app/src/pages/home_page.dart';
 
 Map<String, WidgetBuilder> getAppRoutes(){
   return <String, WidgetBuilder>{
-    'home'    :   (BuildContext context) => HomePage(),
+    'home'       :   (BuildContext context) => HomePage(),
     'detalle'    :   (BuildContext context) => CiudadDetallePage(),
   };
 }

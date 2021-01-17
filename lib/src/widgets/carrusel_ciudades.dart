@@ -55,7 +55,7 @@ class CiudadesHorizontal extends StatelessWidget {
       
       children: _tarjetasCiudades(context),
       controller: PageController(
-        initialPage: 1,
+        initialPage: 0,
         viewportFraction: 0.8
       ),
     );
