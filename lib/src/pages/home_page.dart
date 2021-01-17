@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_app/src/providers/ciudades_provider.dart';
 import 'package:weather_app/src/widgets/carrusel_ciudades.dart';
 
@@ -12,6 +13,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Weather App', style: TextStyle(color: Colors.white),),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(FontAwesomeIcons.search),
+            onPressed: (){} //showSearch(context: null, delegate: null)
+          )
+        ],
         centerTitle: true,
 
       ),

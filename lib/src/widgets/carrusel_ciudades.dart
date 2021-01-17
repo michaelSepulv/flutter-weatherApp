@@ -32,7 +32,9 @@ class CarruselWidget extends StatelessWidget {
             }
             return CiudadesHorizontal(ciudades: snapshot.data);
           }else{
-            return Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+            ));
           }
         }
       ),
@@ -83,21 +85,24 @@ class CiudadesHorizontal extends StatelessWidget {
             Container(
               width: _screenSize.height * 0.2,
               height: _screenSize.height * 0.2,
-              child: FadeInImage(
-                placeholder: AssetImage('assets/loading.gif'), 
-                image: NetworkImage(imageUrl)),
+              child: Hero(
+                tag: ciudad.id,
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/loading.gif'), 
+                  image: NetworkImage(imageUrl)),
+            ),
             ),
             Text(ciudad.weather[0].description.toUpperCase() , style: TextStyle(color: Colors.white, fontSize: 20),),
-            Text('${ (ciudad.main.temp.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Colors.white, fontSize: 30),),
-            Text('Temp. máx: ${ (ciudad.main.tempMin.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Colors.white,),),
-            Text('Temp. min: ${ (ciudad.main.tempMax.toDouble() - 273.15).toStringAsFixed(2) } °C', style: TextStyle(color: Colors.white,),),
+            Text('${ ciudad.main.temp } °C', style: TextStyle(color: Colors.white, fontSize: 30),),
+            Text('Temp. min: ${ ciudad.main.tempMin } °C', style: TextStyle(color: Colors.white,),),
+            Text('Temp. máx: ${ ciudad.main.tempMax } °C', style: TextStyle(color: Colors.white,),),
             Text('Humedad: ${ ciudad.main.humidity } %', style: TextStyle(color: Colors.white,),),
 
             RaisedButton(
               color: Colors.blue,
               shape: StadiumBorder(),
               child: Text('Ver detalle', style: TextStyle(color: Colors.white),),
-              onPressed: (){},
+              onPressed: () => Navigator.pushNamed(context, 'detalle', arguments: ciudad),
             )
 
           ],
