@@ -1,4 +1,4 @@
-# weather_app
+# Weather App
 
 Aplicación hecha en Flutter para consultar el clima de ciudades por todo el mundo
 
