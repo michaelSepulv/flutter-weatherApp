@@ -37,24 +37,26 @@ class HomePage extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(height: size.height * 0.05),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: size.height * 0.05),
 
-          Container(
-            padding: EdgeInsets.all(size.height * 0.018),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              borderRadius: BorderRadius.circular(20)
+            Container(
+              padding: EdgeInsets.all(size.height * 0.018),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: Text('Ciudades cercanas', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),
             ),
-            child: Text('Ciudades cercanas', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),),
-          ),
 
-          SizedBox(height: size.height * 0.03),
+            SizedBox(height: size.height * 0.03),
 
-          CarruselWidget()
-        ],
+            CarruselWidget()
+          ],
+        ),
       ),
     );
   }

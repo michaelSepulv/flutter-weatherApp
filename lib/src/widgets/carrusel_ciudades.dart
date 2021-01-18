@@ -68,19 +68,20 @@ class CiudadesHorizontal extends StatelessWidget {
       final imageUrl = 'http://openweathermap.org/img/wn/${ ciudad.weather[0].icon }@2x.png';
       return Container(
         height: _screenSize.height * 0.65,
-        width:  _screenSize.width * 0.4,
+        width:  _screenSize.width * 0.5,
         margin: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.02),
-        padding: EdgeInsets.symmetric(vertical: _screenSize.height * 0.04),
+        padding: EdgeInsets.symmetric(vertical: _screenSize.height * 0.04, horizontal: _screenSize.height * 0.019),
         decoration: BoxDecoration(
           color: Color(0xfA670CA44),
-          borderRadius: BorderRadius.circular(40)
+          borderRadius: BorderRadius.circular(30)
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            //SizedBox(height: _screenSize.height * 0.04,),
-            Text('Ciudad: ${ ciudad.name }', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),),
-            SizedBox(height: _screenSize.height * 0.05,),
+            Text('Ciudad: ${ ciudad.name }', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
+            SizedBox(height: _screenSize.height * 0.01,),
             
             Container(
               width: _screenSize.height * 0.2,
@@ -92,7 +93,7 @@ class CiudadesHorizontal extends StatelessWidget {
                   image: NetworkImage(imageUrl)),
             ),
             ),
-            Text(ciudad.weather[0].description.toUpperCase() , style: TextStyle(color: Colors.white, fontSize: 20),),
+            Text(ciudad.weather[0].description.toUpperCase() , style: TextStyle(color: Colors.white, fontSize: 20), overflow: TextOverflow.ellipsis,),
             Text('${ ciudad.main.temp } °C', style: TextStyle(color: Colors.white, fontSize: 30),),
             Text('Temp. min: ${ ciudad.main.tempMin } °C', style: TextStyle(color: Colors.white,),),
             Text('Temp. máx: ${ ciudad.main.tempMax } °C', style: TextStyle(color: Colors.white,),),

@@ -17,8 +17,8 @@ class CiudadesProvider{
   //Peticion http para obtener las ciudades de homePage
   Future <List<Ciudad>> getListaCiudades() async{
     
-    String lat = '-33.865261';
-    String lon = '-71.824560';
+    String lat = '-33.021262';
+    String lon = '-71.560829';
     String cnt = '20';
     
 
